@@ -1,13 +1,17 @@
 import React from "react";
 import Item from "./Item";
 
-function ItemList() {
+function ItemList({items, handleBasket}) {
+    const itemNodes = items.map((item) => {
+        return <Item key={item.name} item={item} handleBasket={handleBasket} />
+    })
+
     return (
         <>
-            <h2>This is ItemList</h2>
-            <Item />
-            <Item />
-            <Item />
+            <h2>All products</h2>
+            <ul>
+                {itemNodes}
+            </ul>
         </>
     );
 };

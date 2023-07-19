@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ItemList from "../Components/ItemList";
 
 function ShopContainer() {
@@ -56,17 +56,33 @@ function ShopContainer() {
     ];
 
     const user1 = {
-        name: "Petunia",
+        name: "User1",
         basket: []
     };
 
     const [items] = useState(shopItems);
-    const [user, setUser] = useState(user1);
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        setUser(user1);
+    }, [])
+
+    const handleBasket = function(item) {
+        const updatedUser = {...user};
+
+        updatedUser.basket.push(item);
+
+        setUser(updatedUser);
+        console.log(user.basket);
+    }
 
     return (
         <>
-            <h1>This is ShopContainer</h1>
-            <ItemList />
+            <h1>Wizard Wares</h1>
+            <nav>
+                {user && <h3>Hello, {user.name}</h3>}
+            </nav>
+            <ItemList items={items} handleBasket={handleBasket} />
         </>
     );
 };

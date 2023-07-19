@@ -1,12 +1,18 @@
 import React from "react";
-import Button from "./Button";
 
-function Item() {
+function Item({item, handleBasket}) {
+
+    const onBasketClick = function() {
+        handleBasket(item);
+    }
+
     return (
-        <>
-            <h3>This is Item</h3>
-            <Button />
-        </>
+        <li>
+            <h3>{item.name}</h3>
+            <h4>£{item.price}</h4>
+            <p>{item.description}</p>
+            <button onClick={onBasketClick}>Add</button>
+        </li>
     );
 };
 
