@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 import ItemList from "../Components/ItemList";
 
 function ShopContainer() {
@@ -73,17 +74,33 @@ function ShopContainer() {
         updatedUser.basket.push(item);
 
         setUser(updatedUser);
-        console.log(user.basket);
     }
 
     return (
-        <>
+        <Router>
             <h1>Wizard Wares</h1>
             <nav>
                 {user && <h3>Hello, {user.name}</h3>}
+                <ul>
+                    <li><Link to="/">Shop</Link></li>
+                    <li><Link to="/basket">Basket</Link></li>
+                </ul>
             </nav>
-            <ItemList items={items} handleBasket={handleBasket} />
-        </>
+            <Routes>
+                <Route path="/" element={
+                    <>
+                        <h2>All products</h2>
+                        <ItemList items={items} handleBasket={handleBasket} />
+                    </>
+                    } />
+                {user && <Route path="/basket" element={
+                    <>
+                        <h2>Basket</h2>
+                        <ItemList items={user.basket} handleBasket={handleBasket}/>
+                    </>
+                } />}
+            </Routes>
+        </Router>
     );
 };
 
