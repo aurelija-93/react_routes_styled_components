@@ -1,8 +1,22 @@
 import React, { useEffect, useState } from "react";
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 import ItemList from "../Components/ItemList";
+import { styled } from "styled-components";
 
 function ShopContainer() {
+    const Navigation = styled.nav`
+        display: flex;
+        justify-content: space-around;
+    `
+
+    const NavList = styled.ul`
+        list-style: none;
+        display: flex;
+        padding: 0;
+        width: 7em;
+        justify-content: space-between;
+    `
+
     const shopItems = [
         {
             name: "Gryffindor Robes",
@@ -91,13 +105,13 @@ function ShopContainer() {
     return (
         <Router>
             <h1>Wizard Wares</h1>
-            <nav>
+            <Navigation>
                 {user && <h3>Hello, {user.name}</h3>}
-                <ul>
+                <NavList>
                     <li><Link to="/">Shop</Link></li>
                     <li><Link to="/basket">Basket</Link></li>
-                </ul>
-            </nav>
+                </NavList>
+            </Navigation>
             <Routes>
                 <Route path="/" element={
                     <>
