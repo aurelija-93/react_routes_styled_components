@@ -76,6 +76,18 @@ function ShopContainer() {
         setUser(updatedUser);
     }
 
+    const basketTotal = function() {
+        const prices = user.basket.map((item) => {
+            return item.price;
+        });
+
+        const total = prices.reduce((runningTotal, currentValue) => {
+            return runningTotal + currentValue
+        }, 0);
+
+        return total;
+    }
+
     return (
         <Router>
             <h1>Wizard Wares</h1>
@@ -97,6 +109,7 @@ function ShopContainer() {
                     <>
                         <h2>Basket</h2>
                         <ItemList items={user.basket} handleBasket={handleBasket}/>
+                        {user.basket.length > 0 ? <h3>Total: £{basketTotal()}</h3> : null}
                     </>
                 } />}
             </Routes>
